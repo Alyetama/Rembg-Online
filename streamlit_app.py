@@ -16,6 +16,10 @@ from gotipy import Gotify
 from loguru import logger
 from rembg.bg import remove
 
+GOTIFY = False
+if os.getenv('GOTIFY_HOST_ADDRESS') and os.getenv('GOTIFY_APP_TOKEN'):
+    GOTIFY = True
+
 
 def remove_bg(bytes_data, path):
     result = remove(bytes_data)
@@ -27,9 +31,10 @@ def remove_bg(bytes_data, path):
 
 
 def main():
-    g = Gotify(host_address=os.environ['GOTIFY_HOST_ADDRESS'],
-               fixed_token=os.environ['GOTIFY_APP_TOKEN'],
-               fixed_priority=9)
+    if GOTIFY:
+        g = Gotify(host_address=os.environ['GOTIFY_HOST_ADDRESS'],
+                   fixed_token=os.environ['GOTIFY_APP_TOKEN'],
+                   fixed_priority=9)
 
     if st.sidebar.button('RESET'):
         st.experimental_rerun()
@@ -66,7 +71,8 @@ def main():
 
         nobg_imgs = []
         if st.sidebar.button('Remove background'):
-            g.push('New Request', json.dumps(uploaded_files, indent=4))
+            if GOTIFY:
+                g.push('New Request', json.dumps(uploaded_files, indent=4))
 
             pb = progress_bar.progress(0)
 
