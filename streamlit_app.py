@@ -1,8 +1,11 @@
 import imghdr
 import io
+import json
 import os
+import random
 import tempfile
 import time
+import uuid
 import zipfile
 from pathlib import Path
 
@@ -12,10 +15,6 @@ from dotenv import load_dotenv
 from gotipy import Gotify
 from loguru import logger
 from rembg.bg import remove
-
-GOTIFY = False
-if os.getenv('GOTIFY_HOST_ADDRESS') and os.getenv('GOTIFY_APP_TOKEN'):
-    GOTIFY = True
 
 
 def remove_bg(bytes_data, path):
@@ -29,21 +28,22 @@ def remove_bg(bytes_data, path):
 
 def main():
     if GOTIFY:
-        g = Gotify(host_address=os.environ['GOTIFY_HOST_ADDRESS'],
-                   fixed_token=os.environ['GOTIFY_APP_TOKEN'],
+        g = Gotify(host_address=os.getenv('GOTIFY_HOST_ADDRESS'),
+                   fixed_token=os.getenv('GOTIFY_APP_TOKEN'),
                    fixed_priority=9)
 
-    if st.sidebar.button('RESET'):
+    if st.sidebar.button('CLEAR'):
+        st.session_state['key'] = K
         st.experimental_rerun()
     st.sidebar.markdown('---')
 
     accepted_type = ['png', 'jpg', 'jpeg']
     uploaded_files = st.sidebar.file_uploader('Choose a file',
                                               type=accepted_type,
-                                              accept_multiple_files=True)
+                                              accept_multiple_files=True,
+                                              key=st.session_state['key'])
 
     if uploaded_files:
-
         logger.info(f'Uploaded the following files: {uploaded_files}')
 
         progress_bar = st.empty()
@@ -69,7 +69,8 @@ def main():
         nobg_imgs = []
         if st.sidebar.button('Remove background'):
             if GOTIFY:
-                g.push('New Request', json.dumps(uploaded_files, indent=4))
+                files_dicts = [x.__dict__ for x in uploaded_files]
+                g.push('New Request', json.dumps(files_dicts, indent=4))
 
             pb = progress_bar.progress(0)
 
@@ -119,11 +120,8 @@ def main():
                         key='btn')
                 except IndexError:
                     st.error('No more images to process!')
-
-            if st.session_state.btn:
-                cols.empty()
-                down_btn.empty()
-                progress_bar.empty()
+                finally:
+                    st.session_state['key'] = K
 
 
 if __name__ == '__main__':
@@ -135,5 +133,15 @@ if __name__ == '__main__':
         '#MainMenu {visibility: hidden;}</style>',
         unsafe_allow_html=True)
     logger.add('logs.log')
+
     load_dotenv()
+
+    GOTIFY = False
+    if os.getenv('GOTIFY_HOST_ADDRESS') and os.getenv('GOTIFY_APP_TOKEN'):
+        GOTIFY = True
+
+    K = str(uuid.uuid4())
+    if 'key' not in st.session_state:
+        st.session_state['key'] = K
+
     main()
