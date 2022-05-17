@@ -2,7 +2,6 @@ import imghdr
 import io
 import json
 import os
-import random
 import tempfile
 import time
 import uuid
@@ -14,7 +13,7 @@ from PIL import Image
 from dotenv import load_dotenv
 from gotipy import Gotify
 from loguru import logger
-from rembg.bg import remove
+from rembg.bg import remove  # noqa
 
 
 def remove_bg(bytes_data, path):
@@ -70,7 +69,8 @@ def main():
         if st.sidebar.button('Remove background'):
             if GOTIFY:
                 files_dicts = [x.__dict__ for x in uploaded_files]
-                g.push('New Request', json.dumps(files_dicts, indent=4))
+                g.push(  # noqa
+                    'New Request', json.dumps(files_dicts, indent=4))
 
             pb = progress_bar.progress(0)
 
@@ -93,17 +93,17 @@ def main():
                 col2.image([x[0] for x in nobg_imgs])
 
             if len(nobg_imgs) > 1:
-                with io.BytesIO() as tmpzip:
-                    with zipfile.ZipFile(tmpzip, 'w') as z:
+                with io.BytesIO() as tmp_zip:
+                    with zipfile.ZipFile(tmp_zip, 'w') as z:
                         for img, p, data in nobg_imgs:
                             with tempfile.NamedTemporaryFile() as fp:
                                 img.save(fp.name, format='PNG')
                                 z.write(fp.name,
                                         arcname=p.name,
                                         compress_type=zipfile.ZIP_DEFLATED)
-                    zip_data = tmpzip.getvalue()
+                    zip_data = tmp_zip.getvalue()
 
-                btn = down_btn.download_button(
+                down_btn.download_button(
                     label='Download all results',
                     data=zip_data,
                     file_name=f'results_{int(time.time())}.zip',
@@ -112,7 +112,7 @@ def main():
             else:
                 try:
                     out = nobg_imgs[0]
-                    btn = down_btn.download_button(
+                    down_btn.download_button(
                         label='Download result',
                         data=out[-1],
                         file_name=f'{out[1].stem}_nobg.png',
