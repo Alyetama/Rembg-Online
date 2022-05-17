@@ -2,6 +2,7 @@ import imghdr
 import io
 import json
 import os
+import sys
 import tempfile
 import time
 import uuid
@@ -41,6 +42,13 @@ def main():
                                               type=accepted_type,
                                               accept_multiple_files=True,
                                               key=st.session_state['key'])
+
+    if len(uploaded_files) > MAX_FILES != -1:
+        st.warning(
+            f'Maximum number of files reached! Only the first {MAX_FILES} '
+            'will be processed.'
+        )
+        uploaded_files = uploaded_files[:MAX_FILES]
 
     if uploaded_files:
         logger.info(f'Uploaded the following files: {uploaded_files}')
@@ -135,6 +143,13 @@ if __name__ == '__main__':
     logger.add('logs.log')
 
     load_dotenv()
+
+    if len(sys.argv) > 1:
+        MAX_FILES = int(sys.argv[1])
+    elif os.getenv('MAX_FILES'):
+        MAX_FILES = int(os.getenv('MAX_FILES'))
+    else:
+        MAX_FILES = 10
 
     GOTIFY = False
     if os.getenv('GOTIFY_HOST_ADDRESS') and os.getenv('GOTIFY_APP_TOKEN'):
