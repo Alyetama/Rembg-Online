@@ -1,6 +1,0 @@
-streamlit>=1.9.0
-python-dotenv>=0.20.0
-gotipy>=0.1
-loguru>=0.6.0
-rembg
-Pillow
