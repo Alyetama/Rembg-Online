@@ -4,7 +4,7 @@ services:
 
   remove_background:
     # build: .
-    image: remove-background:latest
+    image: alyetama/remove-background:latest
     ports:
       - "8090:8090"
     command: "streamlit run streamlit_app.py"
