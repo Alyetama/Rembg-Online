@@ -1,8 +1,6 @@
 [server]
 headless = true
-port = 8090
 maxUploadSize = 2
 
 [browser]
 gatherUsageStats = false
-serverAddress = "localhost"
