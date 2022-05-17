@@ -38,7 +38,7 @@ def main():
     st.sidebar.markdown('---')
 
     accepted_type = ['png', 'jpg', 'jpeg']
-    uploaded_files = st.sidebar.file_uploader('Choose a file',
+    uploaded_files = st.sidebar.file_uploader('Choose one or multiple files',
                                               type=accepted_type,
                                               accept_multiple_files=True,
                                               key=st.session_state['key'])

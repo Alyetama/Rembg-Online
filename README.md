@@ -21,7 +21,7 @@ streamlit run streamlit_app.py
 
 ### Option 2: Free cloud hosting on Streamlit Cloud
 
-- [Fork this repository](https://github.com/Alyetama/Remove-Background-Online/fork)
+- [Fork this repository](https://github.com/Alyetama/Remove-Background-Online/fork).
 - Go to [this page]( https://share.streamlit.io/deploy), select your fork under `Repository`, then click `Deploy!`.
 
 ![streamlit_cloud](https://i.imgur.com/STSB68n.png)
