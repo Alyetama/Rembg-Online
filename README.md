@@ -36,5 +36,4 @@ docker-compose up -d
 
 - To configure the streamlit application, edit `.streamlit/config.toml` ([configuration reference](https://docs.streamlit.io/library/advanced-features/configuration)).
 - To configure the maximum number of uploaded files (*default: 10*):
-    - Pass the maximum number after the command (e.g., `streamlit run streamlit_app.py 20`), or
     - Rename `.env.example` to `.env` and edit the value of `MAX_FILES`.

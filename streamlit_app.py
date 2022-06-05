@@ -220,14 +220,10 @@ if __name__ == '__main__':
 
     load_dotenv()
 
-    ALLOW_GIF = True
+    MAX_FILES = 10
 
-    if len(sys.argv) > 1:
-        MAX_FILES = int(sys.argv[1])
-    elif os.getenv('MAX_FILES'):
+    if os.getenv('MAX_FILES'):
         MAX_FILES = int(os.getenv('MAX_FILES'))
-    else:
-        MAX_FILES = 10
 
     GOTIFY = False
     if os.getenv('GOTIFY_HOST_ADDRESS') and os.getenv('GOTIFY_APP_TOKEN'):
