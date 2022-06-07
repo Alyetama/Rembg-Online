@@ -7,7 +7,13 @@ services:
     image: alyetama/remove-background:latest
     ports:
       - "8090:8090"
-    command: "streamlit run streamlit_app.py --server.port=8090 --browser.serverAddress='localhost'"
+    command: >
+      streamlit run streamlit_app.py \
+        --server.port=8090 \
+        --browser.serverAddress=127.0.0.1 \
+        --server.headless=true \
+        --browser.gatherUsageStats=false \
+        --server.maxUploadSize=5
     restart: always
     volumes:
       - "./.streamlit:/home/app/.streamlit"
