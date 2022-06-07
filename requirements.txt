@@ -1,6 +1,6 @@
 streamlit==1.9.0
 rembg==2.0.21
-Pillow==9.1.1
+Pillow==9.0.0
 matplotlib==3.5.2
 loguru==0.6.0
 
