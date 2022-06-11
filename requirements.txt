@@ -1,8 +1,8 @@
 pip>=22.1.2
-streamlit
+streamlit>=1.10.0
 rembg>=2.0.17
-Pillow==9.0.0
-matplotlib==3.5.2
+Pillow>=9.0.0
+matplotlib>=3.5.2
 loguru==0.6.0
 
 # Extra
