@@ -3,8 +3,8 @@ version: "3"
 services:
 
   remove_background:
-    # build: .
-    image: alyetama/remove-background:latest
+    build: .
+    # image: alyetama/remove-background:latest
     ports:
       - "8090:8090"
     command: >
