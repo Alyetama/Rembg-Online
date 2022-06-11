@@ -2,7 +2,6 @@ import imghdr
 import io
 import json
 import os
-import sys
 import tempfile
 import time
 import uuid
@@ -40,27 +39,6 @@ def gif2frames(input_file, skip_every=1):
         frame.save(bytes_obj, format='PNG')
         frames.append((n, bytes_obj.getvalue()))
     return frames
-
-
-def frames2gif(frames, duration=100, disposal=2):
-    im_frames = []
-    for frame in frames:
-        im = frame[0]
-        rgba = im.convert('RGBA')
-        data = rgba.getdata()
-        img = [(255, 255, 255, 0) if x[:3] == (0, 0, 0) else x for x in data]
-        rgba.putdata(img)
-        im_frames.append(rgba)
-
-    bytes_obj = io.BytesIO()
-    im_frames[0].save(bytes_obj,
-                      format='GIF',
-                      duration=duration,
-                      disposal=disposal,
-                      loop=0,
-                      save_all=True,
-                      append_images=im_frames[1:])
-    return bytes_obj
 
 
 def main():
@@ -162,14 +140,10 @@ def main():
 
                 nobg_images = [x[0] for x in nobg_imgs]
 
-                if IS_GIF:
-                    nobg_gif = frames2gif(nobg_imgs, duration=duration)
-                    col2.image(nobg_gif)
-                    col2.markdown(
-                        '🧪 *Use [ezgif.com](https://ezgif.com/) to edit '
-                        'individual frames.*')
-                else:
-                    col2.image(nobg_images)
+                col2.markdown(
+                    '🧪 *Use [ezgif.com](https://ezgif.com/) to create the '
+                    'GIF file and edit individual frames.*')
+                col2.image(nobg_images)
 
             if len(nobg_imgs) > 1:
                 with io.BytesIO() as tmp_zip:
