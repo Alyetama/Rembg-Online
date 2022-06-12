@@ -1,13 +1,12 @@
 FROM python:3.9.10-slim
 
-RUN mkdir -p /home/app/.streamlit
-
+RUN mkdir -p /home/app/.streamlit && mkdir -p /.u2net
 WORKDIR /home/app
+COPY requirements.txt streamlit_app.py download_model.py /home/app/
 
-COPY requirements.txt streamlit_app.py /home/app/
+RUN pip install -U pip && pip install -r /home/app/requirements.txt
+RUN rm -rf "$(pip cache dir)"
 
-RUN pip install -U pip
-RUN pip install -r /home/app/requirements.txt
+RUN python download_model.py
 
-RUN mkdir -p /root/.u2net
-RUN python -c 'from urllib import request; request.urlretrieve("https://github.com/Alyetama/Rembg-Online/releases/download/v0.0.0/u2net.onnx", "/root/.u2net/u2net.onnx")'
+ENTRYPOINT ["streamlit", "run", "streamlit_app.py"]

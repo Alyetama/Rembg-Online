@@ -26,14 +26,27 @@ streamlit run streamlit_app.py
 
 ![streamlit_cloud](https://i.imgur.com/STSB68n.png)
 
-### Option 3: Docker Compose
+### Option 3: Docker
+
+```
+docker run \
+    -p 8501:8501 \
+    -v "${PWD}/.streamlit:/home/app/.streamlit" \
+    alyetama/rembg-app:latest
+```
+
+#### Docker Compose
 
 ```
 docker-compose up -d
 ```
 
-#### Updating
-If you're using the pre-built docker image, you can update the image by running:
+##### Updating
+```sh
+docker pull alyetama/rembg-app:latest
+```
+
+If you're using the pre-built docker image in docker-compose, you can update the image by running:
 ```sh
 docker-compose down
 docker-compose pull
