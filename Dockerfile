@@ -6,6 +6,7 @@ WORKDIR /home/app
 
 COPY requirements.txt streamlit_app.py /home/app/
 
+RUN pip install -U pip
 RUN pip install -r /home/app/requirements.txt
 
 RUN mkdir -p /root/.u2net
