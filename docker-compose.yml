@@ -13,7 +13,7 @@ services:
         --browser.serverAddress=127.0.0.1 \
         --server.headless=true \
         --browser.gatherUsageStats=false \
-        --server.maxUploadSize=5
+        --server.maxUploadSize=10
     restart: always
     volumes:
       - "./.streamlit:/home/app/.streamlit"

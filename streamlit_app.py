@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import imghdr
 import io
 import json
@@ -140,9 +142,10 @@ def main():
 
                 nobg_images = [x[0] for x in nobg_imgs]
 
-                col2.markdown(
-                    '🧪 *Use [ezgif.com](https://ezgif.com/) to create the '
-                    'GIF file and edit individual frames.*')
+                if IS_GIF:
+                    col2.markdown(
+                        '🧪 *Use [ezgif.com](https://ezgif.com/) to create '
+                        'the GIF file and edit individual frames.*')
                 col2.image(nobg_images)
 
             if len(nobg_imgs) > 1:
