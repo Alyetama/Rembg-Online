@@ -15,7 +15,7 @@ from PIL import Image, ImageSequence
 from dotenv import load_dotenv
 from gotipy import Gotify
 from loguru import logger
-from rembg.bg import remove  # noqa
+from rembg.bg import remove
 
 
 def remove_bg(input_data, path):
@@ -58,7 +58,7 @@ def main():
     accepted_type = ['png', 'jpg', 'jpeg', 'gif']
 
     uploaded_files = st.sidebar.file_uploader(
-        'Choose one or multiple files',
+        f'Choose one or multiple files (max: {MAX_FILES})',
         type=accepted_type,
         accept_multiple_files=accept_multiple_files,
         key=st.session_state['key'])
@@ -198,7 +198,6 @@ if __name__ == '__main__':
     load_dotenv()
 
     MAX_FILES = 10
-
     if os.getenv('MAX_FILES'):
         MAX_FILES = int(os.getenv('MAX_FILES'))
 

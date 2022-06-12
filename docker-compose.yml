@@ -2,18 +2,13 @@ version: "3"
 
 services:
 
-  remove_background:
-    build: .
-    # image: alyetama/remove-background:latest
+  rembg-app:
+    # build: .
+    image: alyetama/rembg-app:latest
     ports:
-      - "8090:8090"
+      - "8501:8501"
     command: >
-      streamlit run streamlit_app.py \
-        --server.port=8090 \
-        --browser.serverAddress=127.0.0.1 \
-        --server.headless=true \
-        --browser.gatherUsageStats=false \
-        --server.maxUploadSize=10
+      streamlit run streamlit_app.py
     restart: always
     volumes:
       - "./.streamlit:/home/app/.streamlit"
