@@ -1,6 +1,6 @@
 # Rembg App
 
-Web app to remove images background using [rembg](https://github.com/danielgatis/rembg) ([Demo](https://rembg.vercel.app)).
+Web app to remove images background using [rembg](https://github.com/danielgatis/rembg) ([Demo](https://rembg.000314.xyz)).
 
 [![Docker Build](https://github.com/Alyetama/Rembg-Online/actions/workflows/docker-build.yml/badge.svg)](https://github.com/Alyetama/Rembg-Online/actions/workflows/docker-build.yml) [![pages-build-deployment](https://github.com/Alyetama/Remove-Background-Online/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Alyetama/Remove-Background-Online/actions/workflows/pages/pages-build-deployment) [![Vercel deploy](https://github.com/Alyetama/Remove-Background-Online/actions/workflows/vercel-deploy.yml/badge.svg)](https://github.com/Alyetama/Remove-Background-Online/actions/workflows/vercel-deploy.yml) [![Docker Hub](https://badgen.net/badge/icon/Docker%20Hub?icon=docker&label)](https://hub.docker.com/r/alyetama/rembg-app) [![Supported Python versions](https://img.shields.io/badge/Python-%3E=3.9-blue.svg)](https://www.python.org/downloads/) [![Streamlit](https://img.shields.io/badge/Streamlit-1.10.0-red)](https://github.com/streamlit/streamlit/releases/tag/1.10.0) [![PEP8](https://img.shields.io/badge/Code%20style-PEP%208-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 
